@@ -1,11 +1,10 @@
-import React from 'react'
+// import Image from "next/image";
 
-const DashboardPage = () => {
+export default function DashboardPage() {
   return (
-    <div>
+   <div>
+    Dashboard (Protected)
+   </div>
       
-    </div>
-  )
+  );
 }
-
-export default DashboardPage
