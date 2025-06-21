@@ -12,12 +12,12 @@ import {
   LayoutDashboard,
   MessageSquare,
   Music,
-  Settings,
   VideoIcon,
 } from "lucide-react";
 import { cn } from '@/lib/utils';
 
 import { usePathname } from "next/navigation";
+import { FreeCounter } from './free-counter';
 
 
 // font for the logo only
@@ -60,15 +60,18 @@ const routes = [
     icon: Code,
     color: "text-green-700",
     href: "/code",
-  },
-  {
-    label: "Settings",
-    icon: Settings,
-    href: "/settings",
-  },
+  }
 ];
 
-const Sidebar = () => {
+
+
+const Sidebar = ({
+   apiLimitCount = 0,
+  isPro = false,
+}: {
+  apiLimitCount: number;
+  isPro: boolean;
+}) => {
 
   const pathname = usePathname();
   return (
@@ -103,6 +106,11 @@ const Sidebar = () => {
           ))}
 
             </div>
+        </div>
+
+        <div>
+          <FreeCounter apiLimitCount={apiLimitCount} isPro={isPro} />
+          
         </div>
     </div>
   )
