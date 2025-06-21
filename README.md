@@ -38,3 +38,9 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 set up clerk for authentication
 
+text-gray-900 for the copy
+
+bg-gray-50 background
+
+font-sans   
+emerald-600 green
