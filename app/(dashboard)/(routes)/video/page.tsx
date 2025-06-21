@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { FileAudio } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { Select, SelectTrigger, SelectContent, SelectValue, SelectItem } from "@/components/ui/select";
 
 import { Heading } from "@/components/heading";
 import { Button } from "@/components/ui/button";
@@ -17,7 +18,7 @@ import { Loader } from "@/components/loader";
 import { Empty } from "@/components/ui/empty";
 import { useProModal } from "@/hooks/use-pro-modal";
 
-import { formSchema } from "./constants";
+import { formSchema, videoDurations, videoResolutions, videoTypes } from "./constants";
 
 const VideoPage = () => {
   const router = useRouter();
@@ -79,6 +80,75 @@ const VideoPage = () => {
               gap-2
             "
           >
+            <FormField
+  control={form.control}
+  name="type"
+  render={({ field }) => (
+    <FormItem className="col-span-12 lg:col-span-4">
+      <FormControl>
+        <Select onValueChange={field.onChange} defaultValue={field.value}>
+          <SelectTrigger>
+            <SelectValue placeholder="Select video type" />
+          </SelectTrigger>
+          <SelectContent>
+            {videoTypes.map(option => (
+              <SelectItem key={option.value} value={option.value}>
+                {option.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </FormControl>
+    </FormItem>
+  )}
+/>
+
+<FormField
+  control={form.control}
+  name="resolution"
+  render={({ field }) => (
+    <FormItem className="col-span-6 lg:col-span-4">
+      <FormControl>
+        <Select onValueChange={field.onChange} defaultValue={field.value}>
+          <SelectTrigger>
+            <SelectValue placeholder="Resolution" />
+          </SelectTrigger>
+          <SelectContent>
+            {videoResolutions.map(option => (
+              <SelectItem key={option.value} value={option.value}>
+                {option.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </FormControl>
+    </FormItem>
+  )}
+/>
+
+<FormField
+  control={form.control}
+  name="duration"
+  render={({ field }) => (
+    <FormItem className="col-span-6 lg:col-span-4">
+      <FormControl>
+        <Select onValueChange={field.onChange} defaultValue={field.value}>
+          <SelectTrigger>
+            <SelectValue placeholder="Duration" />
+          </SelectTrigger>
+          <SelectContent>
+            {videoDurations.map(option => (
+              <SelectItem key={option.value} value={option.value}>
+                {option.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </FormControl>
+    </FormItem>
+  )}
+/>
+
             <FormField
               name="prompt"
               render={({ field }) => (

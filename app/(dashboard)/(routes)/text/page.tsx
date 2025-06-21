@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import * as z from "zod";
@@ -8,6 +9,7 @@ import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { ChatCompletionMessageParam } from "openai/resources/chat/completions";
+import { Select, SelectTrigger, SelectContent, SelectValue, SelectItem } from "@/components/ui/select";
 
 import { BotAvatar } from "@/components/bot-avatar";
 import { Heading } from "@/components/heading";
@@ -21,7 +23,7 @@ import { UserAvatar } from "@/components/user-avatar";
 import { Empty } from "@/components/ui/empty";
 import { useProModal } from "@/hooks/use-pro-modal";
 
-import { formSchema } from "./constants";
+import { formSchema,textTypes } from "./constants";
 
 const ConversationPage = () => {
   const router = useRouter();
@@ -31,8 +33,10 @@ const ConversationPage = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      prompt: ""
-    }
+  prompt: "",
+  type: "general",
+}
+
   });
 
   const isLoading = form.formState.isSubmitting;
@@ -84,7 +88,7 @@ const ConversationPage = () => {
   return (
     <div>
       <Heading
-        title="Conversation"
+        title="Text Generation"
         description="Ask anything. Our advanced AI model responds instantly."
         icon={MessageSquare}
         iconColor="text-violet-500"
@@ -94,7 +98,7 @@ const ConversationPage = () => {
         <div>
           <Form {...form}>
             <form
-              onSubmit={form.handleSubmit(onSubmit)}
+              // onSubmit={form.handleSubmit(onSubmit)}
               className="
                 rounded-lg 
                 border 
@@ -108,6 +112,30 @@ const ConversationPage = () => {
                 gap-2
               "
             >
+              <FormField
+  control={form.control}
+  name="type"
+  render={({ field }) => (
+    <FormItem className="col-span-12 lg:col-span-4">
+      <FormControl>
+        <Select onValueChange={field.onChange} defaultValue={field.value}>
+          <SelectTrigger>
+            <SelectValue placeholder="Select type" />
+          </SelectTrigger>
+          <SelectContent>
+            {textTypes.map(option => (
+              <SelectItem key={option.value} value={option.value}>
+                {option.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </FormControl>
+    </FormItem>
+  )}
+/>
+
+
               <FormField
                 name="prompt"
                 render={({ field }) => (

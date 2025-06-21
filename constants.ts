@@ -4,16 +4,16 @@ export const MAX_FREE_COUNTS = 5;
 
 export const tools = [
   {
-    label: 'Conversation',
+    label: 'Text Generation',
     icon: MessageSquare,
-    href: '/conversation',
+    href: '/text',
     color: "text-violet-500",
     bgColor: "bg-violet-500/10",
   },
   {
-    label: 'Music Generation',
+    label: 'Audio Generation',
     icon: Music,
-    href: '/music',
+    href: '/audio',
     color: "text-emerald-500",
     bgColor: "bg-emerald-500/10",
   },
