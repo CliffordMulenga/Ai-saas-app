@@ -38,6 +38,13 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 set up clerk for authentication
 
+set up stripe for payments
+shadcn 
+Tailwind css
+prisma
+Nextjs
+lucide-react icons
+
 text-gray-900 for the copy
 
 bg-gray-50 background
