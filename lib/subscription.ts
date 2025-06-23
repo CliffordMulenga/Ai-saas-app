@@ -1,12 +1,11 @@
 import { auth } from "@clerk/nextjs/server";
-
-
 import prismadb from "@/lib/prismadb";
 
 const DAY_IN_MS = 86_400_000;
 
 export const checkSubscription = async () => {
-  const { userId } = await auth();
+  const session = auth(); // no need for await here
+  const userId = session.userId;
 
   if (!userId) {
     return false;
@@ -22,16 +21,19 @@ export const checkSubscription = async () => {
       stripeCustomerId: true,
       stripePriceId: true,
     },
-  })
+  });
 
-  if (!userSubscription) {
+  if (
+    !userSubscription ||
+    !userSubscription.stripePriceId ||
+    !userSubscription.stripeCurrentPeriodEnd
+  ) {
     return false;
   }
 
   const isValid =
-  userSubscription.stripePriceId &&
-  userSubscription.stripeCurrentPeriodEnd &&
-  userSubscription.stripeCurrentPeriodEnd.getTime() + DAY_IN_MS > Date.now();
+    userSubscription.stripeCurrentPeriodEnd.getTime() + DAY_IN_MS >
+    Date.now();
 
   return !!isValid;
 };
