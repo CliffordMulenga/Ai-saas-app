@@ -8,7 +8,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
       {/* side bar */}
       <div className="hidden md:flex w-72 md:flex-col md:fixed md:inset-y-0 z-[80] bg-gray-200">
 
-        <Sidebar/>
+        <Sidebar isPro={false} apiLimitCount={30}/>
       </div>
 
 
